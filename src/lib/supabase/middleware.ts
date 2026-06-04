@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import type { Database } from "@/lib/types";
+import type { SupabaseCookieToSet } from "@/lib/supabase/cookie-types";
 import { getSupabaseEnv } from "@/lib/supabase/env";
 
 const ADMIN_FREE_ROUTES = ["/admin/login", "/admin/acesso-negado"];
@@ -16,13 +17,13 @@ export async function updateSession(request: NextRequest) {
       getAll() {
         return request.cookies.getAll();
       },
-      setAll(cookiesToSet) {
+      setAll(cookiesToSet: SupabaseCookieToSet[]) {
         cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
         response = NextResponse.next({
           request
         });
         cookiesToSet.forEach(({ name, value, options }) => {
-          response.cookies.set(name, value, options);
+          response.cookies.set(name, value, options as never);
         });
       }
     }
