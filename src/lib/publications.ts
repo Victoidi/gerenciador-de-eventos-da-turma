@@ -1,9 +1,27 @@
+import type { PostgrestError } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/server";
-import type { DashboardMetrics, PublicationFilters } from "@/lib/types";
+import type { DashboardMetrics, Publication, PublicationFilters } from "@/lib/types";
 
 type FilterOptions = {
   disciplinas: string[];
   turmas: string[];
+};
+
+type PublicationListResult = {
+  data: Publication[] | null;
+  error: PostgrestError | null;
+};
+
+type PublicationResult = {
+  data: Publication | null;
+  error: PostgrestError | null;
+};
+
+type DashboardResult = {
+  error: PostgrestError | null;
+  metrics: DashboardMetrics | null;
+  upcoming: Publication[];
+  recent: Publication[];
 };
 
 function cleanTextFilter(value?: string) {
@@ -41,7 +59,9 @@ export function getFilters(searchParams: Record<string, string | string[] | unde
   };
 }
 
-export async function getPublicPublications(filters: PublicationFilters) {
+export async function getPublicPublications(
+  filters: PublicationFilters
+): Promise<PublicationListResult> {
   const supabase = await createClient();
   let query = supabase
     .from("tb_th_publicacao")
@@ -60,20 +80,32 @@ export async function getPublicPublications(filters: PublicationFilters) {
     query = query.or(`nm_titulo.ilike.%${busca}%,ds_publicacao.ilike.%${busca}%`);
   }
 
-  return query;
+  const { data, error } = await query;
+
+  return {
+    data: (data ?? null) as Publication[] | null,
+    error
+  };
 }
 
-export async function getPublicPublicationById(id: string) {
+export async function getPublicPublicationById(id: string): Promise<PublicationResult> {
   const supabase = await createClient();
-  return supabase
+  const { data, error } = await supabase
     .from("tb_th_publicacao")
     .select("*")
     .eq("id_publicacao", id)
     .eq("st_publicacao", "publicado")
     .maybeSingle();
+
+  return {
+    data: (data ?? null) as Publication | null,
+    error
+  };
 }
 
-export async function getAdminPublications(filters: PublicationFilters) {
+export async function getAdminPublications(
+  filters: PublicationFilters
+): Promise<PublicationListResult> {
   const supabase = await createClient();
   let query = supabase
     .from("tb_th_publicacao")
@@ -92,12 +124,26 @@ export async function getAdminPublications(filters: PublicationFilters) {
     query = query.or(`nm_titulo.ilike.%${busca}%,ds_publicacao.ilike.%${busca}%`);
   }
 
-  return query;
+  const { data, error } = await query;
+
+  return {
+    data: (data ?? null) as Publication[] | null,
+    error
+  };
 }
 
-export async function getPublicationForEdit(id: string) {
+export async function getPublicationForEdit(id: string): Promise<PublicationResult> {
   const supabase = await createClient();
-  return supabase.from("tb_th_publicacao").select("*").eq("id_publicacao", id).maybeSingle();
+  const { data, error } = await supabase
+    .from("tb_th_publicacao")
+    .select("*")
+    .eq("id_publicacao", id)
+    .maybeSingle();
+
+  return {
+    data: (data ?? null) as Publication | null,
+    error
+  };
 }
 
 export async function getFilterOptions(admin = false): Promise<FilterOptions> {
@@ -114,13 +160,15 @@ export async function getFilterOptions(admin = false): Promise<FilterOptions> {
     return { disciplinas: [], turmas: [] };
   }
 
+  const rows = data as Array<Pick<Publication, "nm_disciplina" | "nm_turma">>;
+
   return {
-    disciplinas: [...new Set(data.map((item) => item.nm_disciplina).filter(Boolean))].sort(),
-    turmas: [...new Set(data.map((item) => item.nm_turma).filter(Boolean))].sort()
+    disciplinas: [...new Set(rows.map((item) => item.nm_disciplina).filter(Boolean))].sort(),
+    turmas: [...new Set(rows.map((item) => item.nm_turma).filter(Boolean))].sort()
   };
 }
 
-export async function getDashboardData() {
+export async function getDashboardData(): Promise<DashboardResult> {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("tb_th_publicacao")
@@ -136,7 +184,7 @@ export async function getDashboardData() {
     };
   }
 
-  const publications = data ?? [];
+  const publications = (data ?? []) as Publication[];
   const now = new Date();
   const nextWeek = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
 
