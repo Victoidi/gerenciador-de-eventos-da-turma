@@ -17,7 +17,7 @@ export function PublicationFilterForm({
 }) {
   return (
     <form
-      className="grid gap-4 rounded-lg border border-line bg-white p-4 shadow-soft sm:grid-cols-2 lg:grid-cols-4"
+      className="grid gap-4 rounded-lg border border-line bg-surface p-4 shadow-soft sm:grid-cols-2 lg:grid-cols-4"
       action={resetHref}
     >
       <label className="space-y-1.5 text-sm font-semibold text-ink">
@@ -25,7 +25,7 @@ export function PublicationFilterForm({
         <select
           name="tipo"
           defaultValue={filters.tipo ?? ""}
-          className="h-11 w-full rounded-lg border border-line bg-white px-3 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100"
+          className="h-11 w-full rounded-lg border border-line bg-surface px-3 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100"
         >
           <option value="">Todos</option>
           {PUBLICATION_TYPES.map((type) => (
@@ -41,7 +41,7 @@ export function PublicationFilterForm({
         <select
           name="disciplina"
           defaultValue={filters.disciplina ?? ""}
-          className="h-11 w-full rounded-lg border border-line bg-white px-3 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100"
+          className="h-11 w-full rounded-lg border border-line bg-surface px-3 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100"
         >
           <option value="">Todas</option>
           {disciplinas.map((disciplina) => (
@@ -57,7 +57,7 @@ export function PublicationFilterForm({
         <select
           name="turma"
           defaultValue={filters.turma ?? ""}
-          className="h-11 w-full rounded-lg border border-line bg-white px-3 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100"
+          className="h-11 w-full rounded-lg border border-line bg-surface px-3 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100"
         >
           <option value="">Todas</option>
           {turmas.map((turma) => (
@@ -74,7 +74,7 @@ export function PublicationFilterForm({
           <select
             name="status"
             defaultValue={filters.status ?? ""}
-            className="h-11 w-full rounded-lg border border-line bg-white px-3 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100"
+            className="h-11 w-full rounded-lg border border-line bg-surface px-3 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100"
           >
             <option value="">Todos</option>
             {PUBLICATION_STATUSES.map((status) => (
@@ -92,7 +92,7 @@ export function PublicationFilterForm({
           type="date"
           name="inicio"
           defaultValue={filters.inicio ?? ""}
-          className="h-11 w-full rounded-lg border border-line bg-white px-3 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100"
+          className="h-11 w-full rounded-lg border border-line bg-surface px-3 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100"
         />
       </label>
 
@@ -102,7 +102,7 @@ export function PublicationFilterForm({
           type="date"
           name="fim"
           defaultValue={filters.fim ?? ""}
-          className="h-11 w-full rounded-lg border border-line bg-white px-3 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100"
+          className="h-11 w-full rounded-lg border border-line bg-surface px-3 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100"
         />
       </label>
 
@@ -113,7 +113,7 @@ export function PublicationFilterForm({
           name="busca"
           defaultValue={filters.busca ?? ""}
           placeholder="Título ou descrição"
-          className="h-11 w-full rounded-lg border border-line bg-white px-3 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100"
+          className="h-11 w-full rounded-lg border border-line bg-surface px-3 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100"
         />
       </label>
 

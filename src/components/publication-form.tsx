@@ -12,10 +12,10 @@ import { ButtonLink } from "@/components/ui/button";
 import { SubmitButton } from "@/components/ui/submit-button";
 
 const inputClass =
-  "h-11 w-full rounded-lg border border-line bg-white px-3 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100";
+  "h-11 w-full rounded-lg border border-line bg-surface px-3 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100";
 
 const textareaClass =
-  "min-h-32 w-full rounded-lg border border-line bg-white px-3 py-2 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100";
+  "min-h-32 w-full rounded-lg border border-line bg-surface px-3 py-2 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100";
 
 export function PublicationForm({
   action,
@@ -32,7 +32,7 @@ export function PublicationForm({
   const [state, formAction] = useActionState(action, EMPTY_PUBLICATION_ACTION_STATE);
 
   return (
-    <form action={formAction} className="space-y-5 rounded-lg border border-line bg-white p-5 shadow-soft">
+    <form action={formAction} className="space-y-5 rounded-lg border border-line bg-surface p-5 shadow-soft">
       {state.message ? (
         <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
           <p className="font-semibold">{state.message}</p>

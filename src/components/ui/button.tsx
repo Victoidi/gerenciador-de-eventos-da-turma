@@ -8,9 +8,9 @@ type ButtonSize = "sm" | "md";
 const variantClasses: Record<ButtonVariant, string> = {
   primary: "bg-school-600 text-white hover:bg-school-700 focus-visible:outline-school-600",
   secondary:
-    "bg-white text-ink ring-1 ring-inset ring-line hover:bg-slate-50 focus-visible:outline-school-600",
+    "bg-surface text-ink ring-1 ring-inset ring-line hover:bg-parchment focus-visible:outline-school-600",
   danger: "bg-red-600 text-white hover:bg-red-700 focus-visible:outline-red-600",
-  ghost: "bg-transparent text-ink hover:bg-slate-100 focus-visible:outline-school-600"
+  ghost: "bg-transparent text-ink hover:bg-parchment focus-visible:outline-school-600"
 };
 
 const sizeClasses: Record<ButtonSize, string> = {

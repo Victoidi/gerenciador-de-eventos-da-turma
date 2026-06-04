@@ -3,7 +3,7 @@ import { ButtonLink } from "@/components/ui/button";
 
 export function PublicHeader() {
   return (
-    <header className="border-b border-line bg-white/85 backdrop-blur">
+    <header className="border-b border-line bg-surface/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
         <Link href="/" className="group">
           <p className="text-sm font-semibold uppercase tracking-wide text-school-600">

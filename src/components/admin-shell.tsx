@@ -17,8 +17,8 @@ export function AdminShell({
   email?: string | null;
 }) {
   return (
-    <div className="min-h-screen bg-slate-50">
-      <header className="border-b border-line bg-white">
+    <div className="min-h-screen bg-parchment">
+      <header className="border-b border-line bg-surface">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <Link href="/admin/dashboard">

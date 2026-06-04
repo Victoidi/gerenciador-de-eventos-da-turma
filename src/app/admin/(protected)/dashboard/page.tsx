@@ -19,7 +19,7 @@ const metricLabels = [
 
 function PublicationList({ publications }: { publications: Publication[] }) {
   return (
-    <div className="divide-y divide-line rounded-lg border border-line bg-white shadow-soft">
+    <div className="divide-y divide-line rounded-lg border border-line bg-surface shadow-soft">
       {publications.map((publication) => (
         <article key={publication.id_publicacao} className="p-4">
           <div className="flex flex-wrap gap-2">
@@ -65,7 +65,7 @@ export default async function DashboardPage() {
             {metricLabels.map((metric) => (
               <div
                 key={metric.key}
-                className="rounded-lg border border-line bg-white p-5 shadow-soft"
+                className="rounded-lg border border-line bg-surface p-5 shadow-soft"
               >
                 <p className="text-sm font-semibold text-muted">{metric.label}</p>
                 <p className="mt-2 text-3xl font-bold text-ink">{metrics[metric.key]}</p>

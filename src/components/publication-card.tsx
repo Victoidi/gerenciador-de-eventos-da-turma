@@ -14,7 +14,7 @@ export function PublicationCard({
   compact?: boolean;
 }) {
   return (
-    <article className="rounded-lg border border-line bg-white p-5 shadow-soft">
+    <article className="rounded-lg border border-line bg-surface p-5 shadow-soft">
       <div className="flex flex-wrap items-center gap-2">
         <TypeBadge type={publication.tp_publicacao} />
         <StatusBadge status={publication.st_publicacao} />

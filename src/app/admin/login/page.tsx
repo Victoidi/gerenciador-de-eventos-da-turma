@@ -20,7 +20,7 @@ export default async function AdminLoginPage() {
 
   return (
     <main className="flex min-h-screen items-center justify-center px-4 py-10">
-      <section className="w-full max-w-md rounded-lg border border-line bg-white p-6 shadow-soft">
+      <section className="w-full max-w-md rounded-lg border border-line bg-surface p-6 shadow-soft">
         <Link
           href="/"
           className="text-sm font-semibold text-school-700 underline-offset-4 hover:underline"

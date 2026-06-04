@@ -5,14 +5,14 @@ export const PUBLICATION_TYPES: Array<{
   label: string;
   tone: string;
 }> = [
-  { value: "prova", label: "Prova", tone: "bg-rose-50 text-rose-700 ring-rose-200" },
+  { value: "prova", label: "Prova", tone: "bg-wine-50 text-wine-700 ring-wine-200" },
   {
     value: "atividade",
     label: "Atividade",
-    tone: "bg-amber-50 text-amber-700 ring-amber-200"
+    tone: "bg-parchment text-wine-700 ring-line"
   },
-  { value: "evento", label: "Evento", tone: "bg-blue-50 text-blue-700 ring-blue-200" },
-  { value: "aviso", label: "Aviso", tone: "bg-emerald-50 text-emerald-700 ring-emerald-200" }
+  { value: "evento", label: "Evento", tone: "bg-wine-100 text-wine-800 ring-wine-200" },
+  { value: "aviso", label: "Aviso", tone: "bg-ink text-surface ring-ink" }
 ];
 
 export const PUBLICATION_STATUSES: Array<{
@@ -23,17 +23,17 @@ export const PUBLICATION_STATUSES: Array<{
   {
     value: "rascunho",
     label: "Rascunho",
-    tone: "bg-slate-100 text-slate-700 ring-slate-200"
+    tone: "bg-parchment text-muted ring-line"
   },
   {
     value: "publicado",
     label: "Publicado",
-    tone: "bg-green-50 text-green-700 ring-green-200"
+    tone: "bg-wine-50 text-wine-700 ring-wine-200"
   },
   {
     value: "arquivado",
     label: "Arquivado",
-    tone: "bg-zinc-100 text-zinc-700 ring-zinc-200"
+    tone: "bg-ink/10 text-ink ring-ink/15"
   }
 ];
 
@@ -51,13 +51,13 @@ export function getPublicationStatusLabel(value: string) {
 export function getPublicationTypeTone(value: string) {
   return (
     PUBLICATION_TYPES.find((item) => item.value === value)?.tone ??
-    "bg-slate-100 text-slate-700 ring-slate-200"
+    "bg-parchment text-muted ring-line"
   );
 }
 
 export function getPublicationStatusTone(value: string) {
   return (
     PUBLICATION_STATUSES.find((item) => item.value === value)?.tone ??
-    "bg-slate-100 text-slate-700 ring-slate-200"
+    "bg-parchment text-muted ring-line"
   );
 }

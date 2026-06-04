@@ -14,7 +14,7 @@ export default async function HomePage() {
     <main>
       <PublicHeader />
 
-      <section className="border-b border-line bg-white">
+      <section className="border-b border-line bg-surface">
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:py-16">
           <div>
             <p className="text-sm font-semibold uppercase tracking-wide text-school-600">

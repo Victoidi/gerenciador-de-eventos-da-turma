@@ -41,7 +41,7 @@ function hasActiveFilters(filters: Record<string, string | undefined>) {
 
 function AdminPublicationCard({ publication }: { publication: Publication }) {
   return (
-    <article className="rounded-lg border border-line bg-white p-5 shadow-soft">
+    <article className="rounded-lg border border-line bg-surface p-5 shadow-soft">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap gap-2">
@@ -80,7 +80,7 @@ function AdminPublicationCard({ publication }: { publication: Publication }) {
               <select
                 name="st_publicacao"
                 defaultValue={publication.st_publicacao}
-                className="mt-1 h-10 w-full rounded-lg border border-line bg-white px-3 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100"
+                className="mt-1 h-10 w-full rounded-lg border border-line bg-surface px-3 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100"
               >
                 {PUBLICATION_STATUSES.map((status) => (
                   <option key={status.value} value={status.value}>
