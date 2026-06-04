@@ -1,7 +1,18 @@
 import { redirect } from "next/navigation";
+import type { User } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/server";
+import type { AdminProfile } from "@/lib/types";
 
-export async function getAdminContext() {
+type ServerSupabaseClient = Awaited<ReturnType<typeof createClient>>;
+
+type AdminContext = {
+  supabase: ServerSupabaseClient;
+  user: User | null;
+  profile: AdminProfile | null;
+  isAdmin: boolean;
+};
+
+export async function getAdminContext(): Promise<AdminContext> {
   const supabase = await createClient();
   const {
     data: { user }
@@ -26,7 +37,7 @@ export async function getAdminContext() {
   return {
     supabase,
     user,
-    profile,
+    profile: profile as AdminProfile | null,
     isAdmin: Boolean(profile)
   };
 }
