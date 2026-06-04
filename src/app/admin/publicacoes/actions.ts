@@ -42,10 +42,11 @@ export async function createPublicationAction(
   }
 
   const { supabase, user } = await requireAdminForWrite();
-  const { error } = await supabase.from("tb_th_publicacao").insert({
+  const payload = {
     ...validation.data,
     id_usuario_criacao: user.id
-  });
+  };
+  const { error } = await supabase.from("tb_th_publicacao").insert(payload as never);
 
   if (error) {
     return {
@@ -75,7 +76,7 @@ export async function updatePublicationAction(
   const { supabase } = await requireAdminForWrite();
   const { error } = await supabase
     .from("tb_th_publicacao")
-    .update(validation.data)
+    .update(validation.data as never)
     .eq("id_publicacao", id);
 
   if (error) {
@@ -114,7 +115,7 @@ export async function changePublicationStatusAction(formData: FormData) {
   const { supabase } = await requireAdminForWrite();
   const { error } = await supabase
     .from("tb_th_publicacao")
-    .update({ st_publicacao: status })
+    .update({ st_publicacao: status } as never)
     .eq("id_publicacao", id);
 
   if (error) {
