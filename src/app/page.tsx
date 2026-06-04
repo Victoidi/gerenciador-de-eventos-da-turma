@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { EmptyState } from "@/components/empty-state";
 import { PublicHeader } from "@/components/public-header";
 import { PublicationCard } from "@/components/publication-card";
@@ -14,8 +15,19 @@ export default async function HomePage() {
     <main>
       <PublicHeader />
 
-      <section className="border-b border-line bg-surface">
+      <section className="border-b border-line bg-surface/85">
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:py-16">
+          <div className="overflow-hidden rounded-lg border border-line bg-parchment shadow-soft lg:col-span-2">
+            <Image
+              src="/banner-turma.png"
+              alt="Banner da turma 3º04 Ciência de Dados"
+              width={598}
+              height={347}
+              priority
+              className="h-auto w-full object-cover"
+            />
+          </div>
+
           <div>
             <p className="text-sm font-semibold uppercase tracking-wide text-school-600">
               Área pública dos alunos

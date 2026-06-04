@@ -4,7 +4,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Gerenciador de Eventos da Turma",
-  description: "Publicações escolares da turma com painel administrativo protegido."
+  description: "Publicacoes escolares da turma com painel administrativo protegido.",
+  icons: {
+    icon: "/app-icon.png",
+    apple: "/app-icon.png"
+  }
 };
 
 export default function RootLayout({
