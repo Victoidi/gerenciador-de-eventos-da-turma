@@ -114,27 +114,6 @@ export function PublicationForm({
         </label>
 
         <label className="space-y-1.5 text-sm font-semibold text-ink">
-          <span>Turma</span>
-          <input
-            name="nm_turma"
-            required
-            defaultValue={publication?.nm_turma ?? ""}
-            className={inputClass}
-          />
-        </label>
-
-        <label className="space-y-1.5 text-sm font-semibold text-ink">
-          <span>Data de início</span>
-          <input
-            type="datetime-local"
-            name="dt_inicio"
-            required
-            defaultValue={toDateTimeLocalValue(publication?.dt_inicio)}
-            className={inputClass}
-          />
-        </label>
-
-        <label className="space-y-1.5 text-sm font-semibold text-ink">
           <span>Data de fim</span>
           <input
             type="datetime-local"
@@ -145,7 +124,7 @@ export function PublicationForm({
         </label>
 
         <label className="space-y-1.5 text-sm font-semibold text-ink">
-          <span>Local</span>
+          <span>Local opcional</span>
           <input
             name="nm_local"
             defaultValue={publication?.nm_local ?? ""}

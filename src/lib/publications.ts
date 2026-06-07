@@ -4,7 +4,6 @@ import type { DashboardMetrics, Publication, PublicationFilters } from "@/lib/ty
 
 type FilterOptions = {
   disciplinas: string[];
-  turmas: string[];
 };
 
 type PublicationListResult = {
@@ -30,18 +29,6 @@ function cleanTextFilter(value?: string) {
   return cleaned.replace(/[%,]/g, " ");
 }
 
-function dateStart(value?: string) {
-  if (!value) return "";
-  const date = new Date(`${value}T00:00:00`);
-  return Number.isNaN(date.getTime()) ? "" : date.toISOString();
-}
-
-function dateEnd(value?: string) {
-  if (!value) return "";
-  const date = new Date(`${value}T23:59:59.999`);
-  return Number.isNaN(date.getTime()) ? "" : date.toISOString();
-}
-
 export function getFilters(searchParams: Record<string, string | string[] | undefined>) {
   const getValue = (key: string) => {
     const value = searchParams[key];
@@ -51,10 +38,7 @@ export function getFilters(searchParams: Record<string, string | string[] | unde
   return {
     tipo: getValue("tipo") ?? "",
     disciplina: getValue("disciplina") ?? "",
-    turma: getValue("turma") ?? "",
     status: getValue("status") ?? "",
-    inicio: getValue("inicio") ?? "",
-    fim: getValue("fim") ?? "",
     busca: getValue("busca") ?? ""
   };
 }
@@ -67,13 +51,10 @@ export async function getPublicPublications(
     .from("tb_th_publicacao")
     .select("*")
     .eq("st_publicacao", "publicado")
-    .order("dt_inicio", { ascending: true });
+    .order("dt_criacao", { ascending: false });
 
   if (filters.tipo) query = query.eq("tp_publicacao", filters.tipo);
   if (filters.disciplina) query = query.eq("nm_disciplina", filters.disciplina);
-  if (filters.turma) query = query.eq("nm_turma", filters.turma);
-  if (dateStart(filters.inicio)) query = query.gte("dt_inicio", dateStart(filters.inicio));
-  if (dateEnd(filters.fim)) query = query.lte("dt_inicio", dateEnd(filters.fim));
 
   const busca = cleanTextFilter(filters.busca);
   if (busca) {
@@ -110,14 +91,11 @@ export async function getAdminPublications(
   let query = supabase
     .from("tb_th_publicacao")
     .select("*")
-    .order("dt_inicio", { ascending: true });
+    .order("dt_criacao", { ascending: false });
 
   if (filters.tipo) query = query.eq("tp_publicacao", filters.tipo);
   if (filters.disciplina) query = query.eq("nm_disciplina", filters.disciplina);
-  if (filters.turma) query = query.eq("nm_turma", filters.turma);
   if (filters.status) query = query.eq("st_publicacao", filters.status);
-  if (dateStart(filters.inicio)) query = query.gte("dt_inicio", dateStart(filters.inicio));
-  if (dateEnd(filters.fim)) query = query.lte("dt_inicio", dateEnd(filters.fim));
 
   const busca = cleanTextFilter(filters.busca);
   if (busca) {
@@ -148,7 +126,7 @@ export async function getPublicationForEdit(id: string): Promise<PublicationResu
 
 export async function getFilterOptions(admin = false): Promise<FilterOptions> {
   const supabase = await createClient();
-  let query = supabase.from("tb_th_publicacao").select("nm_disciplina,nm_turma");
+  let query = supabase.from("tb_th_publicacao").select("nm_disciplina");
 
   if (!admin) {
     query = query.eq("st_publicacao", "publicado");
@@ -157,14 +135,13 @@ export async function getFilterOptions(admin = false): Promise<FilterOptions> {
   const { data, error } = await query;
 
   if (error || !data) {
-    return { disciplinas: [], turmas: [] };
+    return { disciplinas: [] };
   }
 
-  const rows = data as Array<Pick<Publication, "nm_disciplina" | "nm_turma">>;
+  const rows = data as Array<Pick<Publication, "nm_disciplina">>;
 
   return {
-    disciplinas: [...new Set(rows.map((item) => item.nm_disciplina).filter(Boolean))].sort(),
-    turmas: [...new Set(rows.map((item) => item.nm_turma).filter(Boolean))].sort()
+    disciplinas: [...new Set(rows.map((item) => item.nm_disciplina).filter(Boolean))].sort()
   };
 }
 
@@ -200,10 +177,15 @@ export async function getDashboardData(): Promise<DashboardResult> {
 
   const upcoming = publications
     .filter((item) => {
+      if (!item.dt_inicio) return false;
       const start = new Date(item.dt_inicio);
       return start >= now && start <= nextWeek;
     })
-    .sort((a, b) => new Date(a.dt_inicio).getTime() - new Date(b.dt_inicio).getTime())
+    .sort((a, b) => {
+      const startA = a.dt_inicio ? new Date(a.dt_inicio).getTime() : Number.POSITIVE_INFINITY;
+      const startB = b.dt_inicio ? new Date(b.dt_inicio).getTime() : Number.POSITIVE_INFINITY;
+      return startA - startB;
+    })
     .slice(0, 6);
 
   const recent = publications.slice(0, 6);

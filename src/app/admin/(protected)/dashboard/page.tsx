@@ -20,19 +20,26 @@ const metricLabels = [
 function PublicationList({ publications }: { publications: Publication[] }) {
   return (
     <div className="divide-y divide-line rounded-lg border border-line bg-surface shadow-soft">
-      {publications.map((publication) => (
-        <article key={publication.id_publicacao} className="p-4">
-          <div className="flex flex-wrap gap-2">
-            <TypeBadge type={publication.tp_publicacao} />
-            <StatusBadge status={publication.st_publicacao} />
-          </div>
-          <h3 className="mt-3 font-semibold text-ink">{publication.nm_titulo}</h3>
-          <p className="mt-1 text-sm text-muted">
-            {publication.nm_disciplina} · {publication.nm_turma} ·{" "}
-            {formatDateTime(publication.dt_inicio)}
-          </p>
-        </article>
-      ))}
+      {publications.map((publication) => {
+        const details = [
+          publication.nm_disciplina,
+          publication.nm_turma,
+          publication.dt_inicio ? formatDateTime(publication.dt_inicio) : null
+        ].filter(Boolean);
+
+        return (
+          <article key={publication.id_publicacao} className="p-4">
+            <div className="flex flex-wrap gap-2">
+              <TypeBadge type={publication.tp_publicacao} />
+              <StatusBadge status={publication.st_publicacao} />
+            </div>
+            <h3 className="mt-3 font-semibold text-ink">{publication.nm_titulo}</h3>
+            {details.length > 0 ? (
+              <p className="mt-1 text-sm text-muted">{details.join(" · ")}</p>
+            ) : null}
+          </article>
+        );
+      })}
     </div>
   );
 }

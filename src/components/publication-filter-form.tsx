@@ -5,13 +5,11 @@ import { ButtonLink, buttonClassName } from "@/components/ui/button";
 export function PublicationFilterForm({
   filters,
   disciplinas,
-  turmas,
   showStatus = false,
   resetHref = "/publicacoes"
 }: {
   filters: PublicationFilters;
   disciplinas: string[];
-  turmas: string[];
   showStatus?: boolean;
   resetHref?: string;
 }) {
@@ -52,22 +50,6 @@ export function PublicationFilterForm({
         </select>
       </label>
 
-      <label className="space-y-1.5 text-sm font-semibold text-ink">
-        <span>Turma</span>
-        <select
-          name="turma"
-          defaultValue={filters.turma ?? ""}
-          className="h-11 w-full rounded-lg border border-line bg-surface px-3 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100"
-        >
-          <option value="">Todas</option>
-          {turmas.map((turma) => (
-            <option key={turma} value={turma}>
-              {turma}
-            </option>
-          ))}
-        </select>
-      </label>
-
       {showStatus ? (
         <label className="space-y-1.5 text-sm font-semibold text-ink">
           <span>Status</span>
@@ -85,26 +67,6 @@ export function PublicationFilterForm({
           </select>
         </label>
       ) : null}
-
-      <label className="space-y-1.5 text-sm font-semibold text-ink">
-        <span>Data inicial</span>
-        <input
-          type="date"
-          name="inicio"
-          defaultValue={filters.inicio ?? ""}
-          className="h-11 w-full rounded-lg border border-line bg-surface px-3 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100"
-        />
-      </label>
-
-      <label className="space-y-1.5 text-sm font-semibold text-ink">
-        <span>Data final</span>
-        <input
-          type="date"
-          name="fim"
-          defaultValue={filters.fim ?? ""}
-          className="h-11 w-full rounded-lg border border-line bg-surface px-3 text-sm font-normal text-ink outline-none focus:border-school-500 focus:ring-2 focus:ring-school-100"
-        />
-      </label>
 
       <label className="space-y-1.5 text-sm font-semibold text-ink sm:col-span-2">
         <span>Busca</span>

@@ -34,14 +34,18 @@ export function PublicationCard({
           <dt className="font-semibold text-ink">Disciplina</dt>
           <dd className="text-muted">{publication.nm_disciplina}</dd>
         </div>
-        <div>
-          <dt className="font-semibold text-ink">Turma</dt>
-          <dd className="text-muted">{publication.nm_turma}</dd>
-        </div>
-        <div>
-          <dt className="font-semibold text-ink">Início</dt>
-          <dd className="text-muted">{formatDateTime(publication.dt_inicio)}</dd>
-        </div>
+        {publication.nm_turma ? (
+          <div>
+            <dt className="font-semibold text-ink">Turma</dt>
+            <dd className="text-muted">{publication.nm_turma}</dd>
+          </div>
+        ) : null}
+        {publication.dt_inicio ? (
+          <div>
+            <dt className="font-semibold text-ink">Início</dt>
+            <dd className="text-muted">{formatDateTime(publication.dt_inicio)}</dd>
+          </div>
+        ) : null}
         <div>
           <dt className="font-semibold text-ink">Fim</dt>
           <dd className="text-muted">
