@@ -60,7 +60,7 @@ export function validatePublicationForm(formData: FormData): ValidationResult {
     errors.push("Status informado não é permitido.");
   }
 
-  const dt_fim = dt_fim_raw ? parseDateTime(dt_fim_raw, "Data de fim", errors) : null;
+  const dt_fim = dt_fim_raw ? parseDateTime(dt_fim_raw, "Data final/de entrega", errors) : null;
 
   if (ds_link_opcional) {
     try {

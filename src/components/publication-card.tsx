@@ -40,14 +40,8 @@ export function PublicationCard({
             <dd className="text-muted">{publication.nm_turma}</dd>
           </div>
         ) : null}
-        {publication.dt_inicio ? (
-          <div>
-            <dt className="font-semibold text-ink">Início</dt>
-            <dd className="text-muted">{formatDateTime(publication.dt_inicio)}</dd>
-          </div>
-        ) : null}
         <div>
-          <dt className="font-semibold text-ink">Fim</dt>
+          <dt className="font-semibold text-ink">Data final/de entrega</dt>
           <dd className="text-muted">
             {publication.dt_fim ? formatDateTime(publication.dt_fim) : "Não informado"}
           </dd>

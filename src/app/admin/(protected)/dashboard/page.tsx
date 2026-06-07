@@ -24,7 +24,7 @@ function PublicationList({ publications }: { publications: Publication[] }) {
         const details = [
           publication.nm_disciplina,
           publication.nm_turma,
-          publication.dt_inicio ? formatDateTime(publication.dt_inicio) : null
+          publication.dt_fim ? formatDateTime(publication.dt_fim) : null
         ].filter(Boolean);
 
         return (
@@ -90,7 +90,7 @@ export default async function DashboardPage() {
               ) : (
                 <EmptyState
                   title="Nenhum próximo item na semana"
-                  description="Não há publicações com data de início entre hoje e os próximos 7 dias."
+                  description="Não há publicações com data final/de entrega entre hoje e os próximos 7 dias."
                 />
               )}
             </div>

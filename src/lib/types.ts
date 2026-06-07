@@ -9,7 +9,6 @@ export type Publication = {
   ds_publicacao: string;
   nm_disciplina: string;
   nm_turma: string | null;
-  dt_inicio: string | null;
   dt_fim: string | null;
   nm_local: string | null;
   ds_link_opcional: string | null;
@@ -25,7 +24,6 @@ export type PublicationInsert = Omit<
   | "dt_criacao"
   | "dt_atualizacao"
   | "nm_turma"
-  | "dt_inicio"
   | "dt_fim"
   | "nm_local"
   | "ds_link_opcional"
@@ -35,7 +33,6 @@ export type PublicationInsert = Omit<
   dt_criacao?: string;
   dt_atualizacao?: string;
   nm_turma?: string | null;
-  dt_inicio?: string | null;
   dt_fim?: string | null;
   nm_local?: string | null;
   ds_link_opcional?: string | null;
