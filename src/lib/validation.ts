@@ -44,8 +44,6 @@ export function validatePublicationForm(formData: FormData): ValidationResult {
   const nm_titulo = requiredText(formData, "nm_titulo", "Título", errors);
   const ds_publicacao = requiredText(formData, "ds_publicacao", "Descrição", errors);
   const nm_disciplina = requiredText(formData, "nm_disciplina", "Disciplina", errors);
-  const nm_turma = requiredText(formData, "nm_turma", "Turma", errors);
-  const dt_inicio_raw = requiredText(formData, "dt_inicio", "Data de início", errors);
   const st_publicacao = requiredText(formData, "st_publicacao", "Status", errors);
   const dt_fim_raw = optionalText(formData, "dt_fim");
   const nm_local = optionalText(formData, "nm_local");
@@ -62,12 +60,7 @@ export function validatePublicationForm(formData: FormData): ValidationResult {
     errors.push("Status informado não é permitido.");
   }
 
-  const dt_inicio = parseDateTime(dt_inicio_raw, "Data de início", errors);
   const dt_fim = dt_fim_raw ? parseDateTime(dt_fim_raw, "Data de fim", errors) : null;
-
-  if (dt_inicio && dt_fim && new Date(dt_fim).getTime() < new Date(dt_inicio).getTime()) {
-    errors.push("Data de fim não pode ser anterior à data de início.");
-  }
 
   if (ds_link_opcional) {
     try {
@@ -91,8 +84,6 @@ export function validatePublicationForm(formData: FormData): ValidationResult {
       nm_titulo,
       ds_publicacao,
       nm_disciplina,
-      nm_turma,
-      dt_inicio,
       dt_fim,
       nm_local,
       ds_link_opcional,

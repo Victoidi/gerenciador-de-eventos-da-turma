@@ -39,7 +39,6 @@ export default async function PublicacoesPage({ searchParams }: PageProps) {
         <PublicationFilterForm
           filters={filters}
           disciplinas={options.disciplinas}
-          turmas={options.turmas}
           resetHref="/publicacoes"
         />
 

@@ -8,8 +8,8 @@ export type Publication = {
   nm_titulo: string;
   ds_publicacao: string;
   nm_disciplina: string;
-  nm_turma: string;
-  dt_inicio: string;
+  nm_turma: string | null;
+  dt_inicio: string | null;
   dt_fim: string | null;
   nm_local: string | null;
   ds_link_opcional: string | null;
@@ -21,11 +21,25 @@ export type Publication = {
 
 export type PublicationInsert = Omit<
   Publication,
-  "id_publicacao" | "dt_criacao" | "dt_atualizacao"
+  | "id_publicacao"
+  | "dt_criacao"
+  | "dt_atualizacao"
+  | "nm_turma"
+  | "dt_inicio"
+  | "dt_fim"
+  | "nm_local"
+  | "ds_link_opcional"
+  | "id_usuario_criacao"
 > & {
   id_publicacao?: string;
   dt_criacao?: string;
   dt_atualizacao?: string;
+  nm_turma?: string | null;
+  dt_inicio?: string | null;
+  dt_fim?: string | null;
+  nm_local?: string | null;
+  ds_link_opcional?: string | null;
+  id_usuario_criacao?: string | null;
 };
 
 export type PublicationUpdate = Partial<PublicationInsert>;
@@ -40,10 +54,7 @@ export type AdminProfile = {
 export type PublicationFilters = {
   tipo?: string;
   disciplina?: string;
-  turma?: string;
   status?: string;
-  inicio?: string;
-  fim?: string;
   busca?: string;
 };
 

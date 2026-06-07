@@ -57,14 +57,18 @@ function AdminPublicationCard({ publication }: { publication: Publication }) {
               <dt className="font-semibold text-ink">Disciplina</dt>
               <dd className="text-muted">{publication.nm_disciplina}</dd>
             </div>
-            <div>
-              <dt className="font-semibold text-ink">Turma</dt>
-              <dd className="text-muted">{publication.nm_turma}</dd>
-            </div>
-            <div>
-              <dt className="font-semibold text-ink">Início</dt>
-              <dd className="text-muted">{formatDateTime(publication.dt_inicio)}</dd>
-            </div>
+            {publication.nm_turma ? (
+              <div>
+                <dt className="font-semibold text-ink">Turma</dt>
+                <dd className="text-muted">{publication.nm_turma}</dd>
+              </div>
+            ) : null}
+            {publication.dt_inicio ? (
+              <div>
+                <dt className="font-semibold text-ink">Início</dt>
+                <dd className="text-muted">{formatDateTime(publication.dt_inicio)}</dd>
+              </div>
+            ) : null}
             <div>
               <dt className="font-semibold text-ink">Atualização</dt>
               <dd className="text-muted">{formatDateTime(publication.dt_atualizacao)}</dd>
@@ -159,7 +163,6 @@ export default async function AdminPublicacoesPage({ searchParams }: PageProps) 
       <PublicationFilterForm
         filters={filters}
         disciplinas={options.disciplinas}
-        turmas={options.turmas}
         showStatus
         resetHref="/admin/publicacoes"
       />

@@ -25,7 +25,7 @@ export default async function HomePage() {
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-muted">
               Consulte publicações liberadas pela SA sem precisar fazer login. Use filtros por
-              tipo, disciplina, turma, data e busca textual.
+              tipo, disciplina e busca textual.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <ButtonLink href="/publicacoes">Ver publicações</ButtonLink>
