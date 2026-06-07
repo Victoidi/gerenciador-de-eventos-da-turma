@@ -16,7 +16,6 @@ create table if not exists public.tb_th_publicacao (
   ds_publicacao text not null,
   nm_disciplina text not null,
   nm_turma text null,
-  dt_inicio timestamptz null,
   dt_fim timestamptz null,
   nm_local text null,
   ds_link_opcional text null,
@@ -27,20 +26,18 @@ create table if not exists public.tb_th_publicacao (
   constraint tb_th_publicacao_tp_publicacao_ck
     check (tp_publicacao in ('prova', 'atividade', 'evento', 'aviso')),
   constraint tb_th_publicacao_st_publicacao_ck
-    check (st_publicacao in ('rascunho', 'publicado', 'arquivado')),
-  constraint tb_th_publicacao_periodo_ck
-    check (dt_inicio is null or dt_fim is null or dt_fim >= dt_inicio)
+    check (st_publicacao in ('rascunho', 'publicado', 'arquivado'))
 );
 
 alter table public.tb_th_publicacao
-  alter column nm_turma drop not null,
-  alter column dt_inicio drop not null,
-  alter column nm_local drop not null;
+  drop constraint if exists tb_th_publicacao_periodo_ck;
+
+drop index if exists public.idx_tb_th_publicacao_dt_inicio;
 
 alter table public.tb_th_publicacao
-  drop constraint if exists tb_th_publicacao_periodo_ck,
-  add constraint tb_th_publicacao_periodo_ck
-    check (dt_inicio is null or dt_fim is null or dt_fim >= dt_inicio);
+  drop column if exists dt_inicio,
+  alter column nm_turma drop not null,
+  alter column nm_local drop not null;
 
 create index if not exists idx_tb_th_publicacao_tp_publicacao
   on public.tb_th_publicacao (tp_publicacao);
@@ -53,9 +50,6 @@ create index if not exists idx_tb_th_publicacao_nm_disciplina
 
 create index if not exists idx_tb_th_publicacao_nm_turma
   on public.tb_th_publicacao (nm_turma);
-
-create index if not exists idx_tb_th_publicacao_dt_inicio
-  on public.tb_th_publicacao (dt_inicio);
 
 create index if not exists idx_tb_th_publicacao_titulo_trgm
   on public.tb_th_publicacao using gin (nm_titulo gin_trgm_ops);

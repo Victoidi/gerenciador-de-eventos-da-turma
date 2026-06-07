@@ -177,14 +177,14 @@ export async function getDashboardData(): Promise<DashboardResult> {
 
   const upcoming = publications
     .filter((item) => {
-      if (!item.dt_inicio) return false;
-      const start = new Date(item.dt_inicio);
-      return start >= now && start <= nextWeek;
+      if (!item.dt_fim) return false;
+      const dueDate = new Date(item.dt_fim);
+      return dueDate >= now && dueDate <= nextWeek;
     })
     .sort((a, b) => {
-      const startA = a.dt_inicio ? new Date(a.dt_inicio).getTime() : Number.POSITIVE_INFINITY;
-      const startB = b.dt_inicio ? new Date(b.dt_inicio).getTime() : Number.POSITIVE_INFINITY;
-      return startA - startB;
+      const dueA = a.dt_fim ? new Date(a.dt_fim).getTime() : Number.POSITIVE_INFINITY;
+      const dueB = b.dt_fim ? new Date(b.dt_fim).getTime() : Number.POSITIVE_INFINITY;
+      return dueA - dueB;
     })
     .slice(0, 6);
 

@@ -114,7 +114,7 @@ export function PublicationForm({
         </label>
 
         <label className="space-y-1.5 text-sm font-semibold text-ink">
-          <span>Data de fim</span>
+          <span>Data final/de entrega</span>
           <input
             type="datetime-local"
             name="dt_fim"
